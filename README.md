@@ -18,14 +18,17 @@ Ensure you have mongodb installed in your system and that it is running
 ### Start the backend server
 ```bash
 cd react-contact-manager/backend
-npm start```
+npm start
+```
+
 
 ### Start the client
 ```bash
 cd react-contact-manager
-npm start```
+npm start
+```
 
-Your default web browser should be launched automatically
+Your default web browser will be launched automatically with the url http://localhost:3000
 
 
 ## Important!
