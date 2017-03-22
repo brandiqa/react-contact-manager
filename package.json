@@ -2,9 +2,16 @@
   "name": "contact-manager",
   "version": "0.1.0",
   "private": true,
+  "description": "Basic crud react app for managing contacts",
+  "author": "Michael Wanyoike",
+  "license": "MIT",
   "dependencies": {
     "react": "^15.4.2",
     "react-dom": "^15.4.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:brandiqa/react-contact-manager.git"
   },
   "devDependencies": {
     "react-scripts": "0.9.5"
