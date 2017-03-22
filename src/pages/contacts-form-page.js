@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Grid, Button } from 'semantic-ui-react'
+import { Form, Grid, Button } from 'semantic-ui-react';
 
 class ContactsFormPage extends Component {
   render() {
