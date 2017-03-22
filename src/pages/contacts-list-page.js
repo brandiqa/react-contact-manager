@@ -4,7 +4,7 @@ class ContactsListPage extends Component {
   render() {
     return (
       <div>
-        <h1>Contacts List</h1>
+        <h1 style={{marginTop:"1em"}}>Contacts List</h1>
       </div>
     )
   }
