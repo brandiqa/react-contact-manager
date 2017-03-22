@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Card, Button, Icon } from 'semantic-ui-react'
 
 export default function ContactCard({contact}) {
