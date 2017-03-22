@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
-import { Card, Button } from 'semantic-ui-react'
+import { Card, Button, Icon } from 'semantic-ui-react'
 
 export default function ContactCard({contact}) {
   return (
     <Card>
       <Card.Content>
         <Card.Header>
-          {contact.name.first} {contact.name.last}
+          <Icon name='user outline'/> {contact.name.first} {contact.name.last}
         </Card.Header>
         <Card.Description>
-          <p>{contact.phone}</p>
-          <p>{contact.email}</p>
+          <p><Icon name='phone'/> {contact.phone}</p>
+          <p><Icon name='mail outline'/> {contact.email}</p>
         </Card.Description>
       </Card.Content>
       <Card.Content extra>
