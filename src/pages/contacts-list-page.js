@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ContactCard from '../components/contact-card';
-import { Message, Card } from 'semantic-ui-react';
+import { Message, Card, Loader} from 'semantic-ui-react';
 import { fetchContacts } from "../actions/contacts-actions"
 
 class ContactsListPage extends Component {
@@ -34,6 +34,7 @@ class ContactsListPage extends Component {
     return (
       <div>
         <h1 style={{marginTop:"1em"}}>Contacts List</h1>
+        { this.props.fetching ? <Loader active/> : ''}
         { this.props.error ? errorMessage : contactsComp }
       </div>
     )
