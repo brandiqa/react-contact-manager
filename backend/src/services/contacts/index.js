@@ -16,10 +16,10 @@ module.exports = function() {
   };
 
   // Initialize our service with any options it requires
-  app.use('/contacts', service(options));
+  app.use('/api/contacts', service(options));
 
   // Get our initialize service to that we can bind hooks
-  const contactsService = app.service('/contacts');
+  const contactsService = app.service('/api/contacts');
 
   // Set up our before hooks
   contactsService.before(hooks.before);
