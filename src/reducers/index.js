@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import ContactsReducer from './contacts-reducer';
 
 const rootReducer = combineReducers({
-  contacts: ContactsReducer
+  contactStore: ContactsReducer
 })
 
 export default rootReducer;
