@@ -1,4 +1,4 @@
-import { FETCH_CONTACTS, FETCH_CONTACTS_FULFILLED, FETCH_CONTACTS_REJECTED } from '../actions/contacts-actions';
+import { FETCH_CONTACTS_PENDING, FETCH_CONTACTS_FULFILLED, FETCH_CONTACTS_REJECTED } from '../actions/contacts-actions';
 
 const defaultState = {
   contacts: [],
@@ -9,8 +9,11 @@ const defaultState = {
 
 export default (state=defaultState, action={}) => {
   switch (action.type) {
-    case FETCH_CONTACTS:
-      return {...state, fetching: true }
+    case FETCH_CONTACTS_PENDING:
+      return {
+        ...state,
+        fetching: true
+      }
 
     case FETCH_CONTACTS_FULFILLED:
       return {
@@ -18,14 +21,14 @@ export default (state=defaultState, action={}) => {
         fetching: false,
         fetched: true,
         error: null,
-        contacts: action.payload,
+        contacts: action.payload.data.data,
       }
 
     case FETCH_CONTACTS_REJECTED:
       return {
         ...state,
         fetching: false,
-        error: action.payload
+        error: action.payload.message
        }
 
     default:
