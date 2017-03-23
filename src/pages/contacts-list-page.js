@@ -7,7 +7,7 @@ class ContactsListPage extends Component {
   createContactCards() {
     return contacts.map((contact) => {
       return (
-        <ContactCard contact={contact}/>
+        <ContactCard key={contact._id} contact={contact}/>
       )
     });
   }
