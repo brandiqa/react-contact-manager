@@ -10,13 +10,14 @@ const defaultState = {
 export default (state=defaultState, action={}) => {
   switch (action.type) {
     case FETCH_CONTACTS:
-      return {...state, fetching: true}
+      return {...state, fetching: true }
 
     case FETCH_CONTACTS_FULFILLED:
       return {
         ...state,
         fetching: false,
         fetched: true,
+        error: null,
         contacts: action.payload,
       }
 
@@ -24,7 +25,7 @@ export default (state=defaultState, action={}) => {
       return {
         ...state,
         fetching: false,
-         error: action.payload
+        error: action.payload
        }
 
     default:

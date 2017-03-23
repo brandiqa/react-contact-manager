@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ContactCard from '../components/contact-card';
-import { Card } from 'semantic-ui-react';
-// import { contacts } from '../bootstrap';
+import { Message, Card } from 'semantic-ui-react';
 import { fetchContacts } from "../actions/contacts-actions"
 
 class ContactsListPage extends Component {
 
   componentDidMount = () => {
-
+    this.props.fetchContacts()
   }
 
   createContactCards() {
@@ -20,12 +19,22 @@ class ContactsListPage extends Component {
   }
 
   render() {
+    const errorMessage = (
+      <Message negative>
+        <Message.Header>{this.props.error}</Message.Header>
+        <p>Please contact the administrator</p>
+      </Message>
+    );
+
+    const contactsComp = (
+      <Card.Group>
+        {this.createContactCards()}
+      </Card.Group>
+    )
     return (
       <div>
         <h1 style={{marginTop:"1em"}}>Contacts List</h1>
-        <Card.Group>
-          {this.createContactCards()}
-        </Card.Group>
+        { this.props.error ? errorMessage : contactsComp }
       </div>
     )
   }
