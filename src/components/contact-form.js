@@ -21,12 +21,19 @@ class ContactForm extends Component {
     })
   }
 
+  handleSubmit = (e) => {
+    e.preventDefault();
+    // Todo: Validate Form
+    const { _id, first, last, phone, email } = this.state;
+    const contact = {_id, name: { first, last}, phone, email}
+  }
+
   render() {
     return (
       <Grid centered columns={2} >
         <Grid.Column>
           <h1 style={{marginTop:"1em"}}>{this.state.pageTitle}</h1>
-          <Form className={classnames('ui', 'form', {loading: this.state.loading })}>
+          <Form className={classnames('ui', 'form', {loading: this.state.loading })} onSubmit={this.handleSubmit}>
 
             {!!this.state.errors.global && <div className="ui negative message"><p>{this.state.errors.global}</p></div>}
 
@@ -53,12 +60,18 @@ class ContactForm extends Component {
               <Form.Input
                 label='Phone'
                 placeholder="phone"
+                name="phone"
+                value={this.state.phone}
+                onChange={this.handleChange}
               />
             </div>
             <div className={classnames('field', {error: !!this.state.errors.email})}>
               <Form.Input
                 label='Email'
                 placeholder="email"
+                name="email"
+                value={this.state.email}
+                onChange={this.handleChange}
               />
             </div>
             <Button type='submit' primary>Save</Button>
