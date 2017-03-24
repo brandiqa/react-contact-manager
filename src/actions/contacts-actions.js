@@ -12,3 +12,12 @@ export function fetchContacts() {
     })
   }
 }
+
+export function saveContact(contact) {
+  return dispatch => {
+    dispatch({
+      type: 'SAVE_CONTACT',
+      payload: client.post("/api/contacts", contact)
+    })
+  }
+}

@@ -47,39 +47,39 @@ class ContactForm extends Component {
 
             <div className={classnames('field', {error: !!this.state.errors.first})}>
               <Form.Input
-                label       ='First name'
-                placeholder ='First name'
-                name        ="first"
-                value       ={this.state.first}
-                onChange    ={this.handleChange}
+                label='First name'
+                placeholder='First name'
+                name="first"
+                value={this.state.first}
+                onChange={this.handleChange}
               />
               <span>{this.state.errors.first}</span>
             </div>
             <div className={classnames('field', {error: !!this.state.errors.last})}>
               <Form.Input
-                label       ='Last name'
-                placeholder ='Last name'
-                name        ="last"
-                value       ={this.state.last}
-                onChange    ={this.handleChange}
+                label='Last name'
+                placeholder='Last name'
+                name="last"
+                value={this.state.last}
+                onChange={this.handleChange}
                />
             </div>
             <div className={classnames('field', {error: !!this.state.errors.phone})}>
               <Form.Input
-                label       ='Phone'
-                placeholder ="phone"
-                name        ="phone"
-                value       ={this.state.phone}
-                onChange    ={this.handleChange}
+                label='Phone'
+                placeholder="phone"
+                name="phone"
+                value={this.state.phone}
+                onChange={this.handleChange}
               />
             </div>
             <div className={classnames('field', {error: !!this.state.errors.email})}>
               <Form.Input
-                label       ='Email'
-                placeholder ="email"
-                name        ="email"
-                value       ={this.state.email}
-                onChange    ={this.handleChange}
+                label='Email'
+                placeholder="email"
+                name="email"
+                value={this.state.email}
+                onChange={this.handleChange}
               />
             </div>
             <Button type='submit' primary>Save</Button>
@@ -91,7 +91,7 @@ class ContactForm extends Component {
 }
 
 ContactForm.propTypes = {
-  contact    : React.PropTypes.object.isRequired,
+  // contact    : React.PropTypes.object.isRequired,
   saveContact: React.PropTypes.func.isRequired
 }
 
