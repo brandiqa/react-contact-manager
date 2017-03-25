@@ -34,8 +34,10 @@ export default (state=defaultState, action={}) => {
        }
 
     case SAVE_CONTACT_FULFILLED:
-      console.log(action.payload);
-      return state;
+      return {
+        ...state,
+        contacts: [...state.contacts, action.payload.data]
+      }
 
       case SAVE_CONTACT_REJECTED:
         const data = action.payload.response.data;

@@ -11,14 +11,13 @@ class ContactForm extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    this.props.handleSubmit().then(
-      (err) => {
+    this.props.handleSubmit()
+      .catch(err => {
         this.setState({
-          global: err.global,
-          errors: err.errors
+          global: err.response.data.message,
+          errors:err.response.data.errors
         })
-      }
-    )
+      })
   }
 
   render() {

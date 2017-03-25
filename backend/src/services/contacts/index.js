@@ -10,8 +10,8 @@ module.exports = function() {
   const options = {
     Model: contacts,
     paginate: {
-      default: 5,
-      max: 25
+      default: 100,
+      max: 100
     }
   };
 
