@@ -95,25 +95,25 @@ class ContactForm extends Component {
             <div>
               <Form.Field>
                 <label htmlFor="first">First Name</label>
-                <Field name="first" component="input" type="text"/>
+                <Field placeholder="First Name" name="first" component="input" type="text"/>
               </Form.Field>
             </div>
             <div>
               <Form.Field>
                 <label htmlFor="last">Last Name</label>
-                <Field name="last" component="input" type="text"/>
+                <Field  placeholder="Last Name" name="last" component="input" type="text"/>
               </Form.Field>
             </div>
             <div>
               <Form.Field>
                 <label htmlFor="phone">Phone</label>
-                <Field name="phone" component="input" type="text"/>
+                <Field  placeholder="Phone Number" name="phone" component="input" type="text"/>
               </Form.Field>
             </div>
             <div className={classnames('field', {error: !!this.props.errors})}>
               <Form.Field>
                 <label htmlFor="email">Last Name</label>
-                <Field name="email" component="input" type="email"/>
+                <Field  placeholder="Email Address" name="email" component="input" type="email"/>
               </Form.Field>
             </div>
             <Button type='submit' primary>Save</Button>
