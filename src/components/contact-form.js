@@ -86,7 +86,7 @@ class ContactForm extends Component {
   // }
 
   render() {
-    const { handleSubmit } = this.props;
+    const { handleSubmit,  pristine, submitting } = this.props;
     return (
       <Grid centered columns={2}>
         <Grid.Column>
@@ -95,28 +95,28 @@ class ContactForm extends Component {
             <div>
               <Form.Field>
                 <label htmlFor="first">First Name</label>
-                <Field placeholder="First Name" name="first" component="input" type="text"/>
+                <Field name="first" component="input" type="text" placeholder="First Name"/>
               </Form.Field>
             </div>
             <div>
               <Form.Field>
                 <label htmlFor="last">Last Name</label>
-                <Field  placeholder="Last Name" name="last" component="input" type="text"/>
+                <Field name="last" component="input" type="text" placeholder="Last Name"/>
               </Form.Field>
             </div>
             <div>
               <Form.Field>
                 <label htmlFor="phone">Phone</label>
-                <Field  placeholder="Phone Number" name="phone" component="input" type="text"/>
+                <Field name="phone" component="input" type="text" placeholder="Phone Number"/>
               </Form.Field>
             </div>
             <div className={classnames('field', {error: !!this.props.errors})}>
               <Form.Field>
-                <label htmlFor="email">Last Name</label>
-                <Field  placeholder="Email Address" name="email" component="input" type="email"/>
+                <label htmlFor="email">Email</label>
+                <Field name="email" component="input" type="email" placeholder="Email Address"/>
               </Form.Field>
             </div>
-            <Button type='submit' primary>Save</Button>
+            <Button primary type='submit' disabled={pristine || submitting}>Save</Button>
           </Form>
         </Grid.Column>
       </Grid>

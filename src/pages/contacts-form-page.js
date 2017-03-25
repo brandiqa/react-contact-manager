@@ -10,18 +10,23 @@ class ContactsFormPage extends Component {
     redirect: false
   }
 
-  saveContact = contact => {
-    // console.log("saveContact: ", contact)
-    this.props.saveContact(contact)
-    // return this.props.saveContact(contact)
-    //   .then((response) =>{
-    //     this.setState({redirect: true});
-    //   })
+  // saveContact = contact => {
+  //   // console.log("saveContact: ", contact)
+  //   this.props.saveContact(contact)
+  //   // return this.props.saveContact(contact)
+  //   //   .then((response) =>{
+  //   //     this.setState({redirect: true});
+  //   //   })
+  // }
+
+  submit = ({first, last, phone, email}) => {
+    const contact = { name: { first, last },phone, email }
+    this.props.saveContact(contact);
   }
 
   render() {
     return (
-      <ContactForm contact={this.props.contact}  saveContact={this.saveContact} />
+      <ContactForm contact={this.props.contact} onSubmit={this.submit}  />
     )
   }
 }
