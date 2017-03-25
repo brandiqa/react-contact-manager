@@ -28,12 +28,7 @@ class ContactForm extends Component {
     const contact = {_id, name: { first, last}, phone, email}
     // Save contact
     this.setState({loading: true})
-    this.props.saveContact(contact)
-      .catch( err => {
-        err.response.json().then(errors => {
-          this.setState({ errors, loading:false })
-        })
-      })
+    this.props.saveContact(contact);
   }
 
   render() {
@@ -91,7 +86,6 @@ class ContactForm extends Component {
 }
 
 ContactForm.propTypes = {
-  // contact    : React.PropTypes.object.isRequired,
   saveContact: React.PropTypes.func.isRequired
 }
 

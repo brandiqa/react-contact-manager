@@ -1,10 +1,12 @@
-import { FETCH_CONTACTS_PENDING, FETCH_CONTACTS_FULFILLED, FETCH_CONTACTS_REJECTED } from '../actions/contacts-actions';
+import { FETCH_CONTACTS_PENDING, FETCH_CONTACTS_FULFILLED, FETCH_CONTACTS_REJECTED,
+SAVE_CONTACT_FULFILLED, SAVE_CONTACT_REJECTED } from '../actions/contacts-actions';
 
 const defaultState = {
   contacts: [],
   fetching: false,
   fetched: false,
-  error: null
+  errorMessage: null,
+  errors: null
 }
 
 export default (state=defaultState, action={}) => {
@@ -20,7 +22,7 @@ export default (state=defaultState, action={}) => {
         ...state,
         fetching: false,
         fetched: true,
-        error: null,
+        errorMessage: null,
         contacts: action.payload.data.data,
       }
 
@@ -28,8 +30,20 @@ export default (state=defaultState, action={}) => {
       return {
         ...state,
         fetching: false,
-        error: action.payload.message
+        errorMessage: action.payload.message
        }
+
+    case SAVE_CONTACT_FULFILLED:
+      console.log(action.payload);
+      return state;
+
+      case SAVE_CONTACT_REJECTED:
+        const data = action.payload.response.data;
+        return {
+          ...state,
+          errorMessage: data.message,
+          errors: data.errors
+        }
 
     default:
       return state;

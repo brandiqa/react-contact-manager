@@ -1,8 +1,10 @@
 import { client } from './';
 
-export const FETCH_CONTACTS_PENDING = 'FETCH_CONTACTS_PENDING';
+export const FETCH_CONTACTS_PENDING   = 'FETCH_CONTACTS_PENDING';
 export const FETCH_CONTACTS_FULFILLED = 'FETCH_CONTACTS_FULFILLED';
-export const FETCH_CONTACTS_REJECTED = 'FETCH_CONTACTS_REJECTED';
+export const FETCH_CONTACTS_REJECTED  = 'FETCH_CONTACTS_REJECTED';
+export const SAVE_CONTACT_FULFILLED   = 'SAVE_CONTACT_FULFILLED';
+export const SAVE_CONTACT_REJECTED    = 'SAVE_CONTACT_REJECTED';
 
 export function fetchContacts() {
   return dispatch => {
@@ -18,6 +20,12 @@ export function saveContact(contact) {
     dispatch({
       type: 'SAVE_CONTACT',
       payload: client.post("/api/contacts", contact)
+    })
+    .catch(err => {
+      console.log("ACTIONS")
+      console.log(err.response.data.message)
+      // console.log(JSON.stringify(err))
+      throw err
     })
   }
 }

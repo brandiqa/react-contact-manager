@@ -21,7 +21,7 @@ class ContactsListPage extends Component {
   render() {
     const errorMessage = (
       <Message negative>
-        <Message.Header>{this.props.error}</Message.Header>
+        <Message.Header>{this.props.errorMsg}</Message.Header>
         <p>Please contact the administrator</p>
       </Message>
     );
@@ -44,7 +44,7 @@ class ContactsListPage extends Component {
 function mapStateToProps(state) {
   return {
     contacts: state.contactStore.contacts,
-    error   : state.contactStore.error,
+    errorMsg   : state.contactStore.errorMessage,
     fetching: state.contactStore.fetching,
     fetched : state.contactStore.fetched
   }

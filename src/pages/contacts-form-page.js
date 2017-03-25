@@ -11,11 +11,12 @@ class ContactsFormPage extends Component {
   }
 
   saveContact = contact => {
-    console.log(contact)
-    return this.props.saveContact(contact)
-      .then(() =>{
-        this.setState({redirect: true});
-      })
+    // console.log("saveContact: ", contact)
+    this.props.saveContact(contact)
+    // return this.props.saveContact(contact)
+    //   .then((response) =>{
+    //     this.setState({redirect: true});
+    //   })
   }
 
   render() {
