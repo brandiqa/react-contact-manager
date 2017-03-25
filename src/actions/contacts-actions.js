@@ -1,4 +1,5 @@
 import { client } from './';
+import { SubmissionError } from 'redux-form';
 
 export const FETCH_CONTACTS_PENDING   = 'FETCH_CONTACTS_PENDING';
 export const FETCH_CONTACTS_FULFILLED = 'FETCH_CONTACTS_FULFILLED';
@@ -17,15 +18,12 @@ export function fetchContacts() {
 
 export function saveContact(contact) {
   return dispatch => {
-    dispatch({
+    return dispatch({
       type: 'SAVE_CONTACT',
       payload: client.post("/api/contacts", contact)
     })
     .catch(err => {
-      console.log("ACTIONS")
-      console.log(err.response.data.message)
-      // console.log(JSON.stringify(err))
-      throw err
+      throw new SubmissionError({global:err.response.data.message, errors:err.response.data.errors})
     })
   }
 }
