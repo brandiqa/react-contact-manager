@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import ContactCard from '../components/contact-card';
 import { Message, Card, Loader} from 'semantic-ui-react';
+import ContactCard from '../components/contact-card';
 import { fetchContacts } from "../actions/contacts-actions"
 
 class ContactsListPage extends Component {
@@ -44,7 +44,7 @@ class ContactsListPage extends Component {
 function mapStateToProps(state) {
   return {
     contacts: state.contactStore.contacts,
-    errorMsg   : state.contactStore.errorMessage,
+    errorMsg: state.contactStore.errorMessage,
     fetching: state.contactStore.fetching,
     fetched : state.contactStore.fetched
   }

@@ -2,15 +2,13 @@ import React, { Component } from 'react';
 import ContactForm from '../components/contact-form';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
-import { SubmissionError } from 'redux-form';  // ES6
+import { SubmissionError } from 'redux-form';
 import { saveContact } from '../actions/contacts-actions';
 
 class ContactsFormPage extends Component {
 
   state = {
-    redirect: false,
-    errorMessage: null,
-    errors: {}
+    redirect: false
   }
 
   submit = ({first, last, phone, email}) => {
