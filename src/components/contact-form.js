@@ -5,24 +5,9 @@ import { Field, reduxForm } from 'redux-form';
 
 class ContactForm extends Component {
 
-  state = {
-    errors:{}
-  }
-
-  handleSubmit = (e) => {
-    e.preventDefault()
-    this.props.handleSubmit()
-      .catch(err => {
-        this.setState({
-          global: err.response.data.message,
-          errors:err.response.data.errors
-        })
-      })
-  }
-
   render() {
-    const { pristine, submitting } = this.props;
-    const { "name.first":first, "name.last":last, phone, email } = this.state.errors;
+    const { handleSubmit, pristine, submitting, errorMessage, errors } = this.props;
+    const { "name.first":first, "name.last":last, phone, email } = errors;
 
     return (
       <Grid centered columns={2}>
@@ -30,11 +15,11 @@ class ContactForm extends Component {
           <h1 style={{marginTop:"1em"}}>Add New Contact</h1>
 
           {
-            !!this.state.global &&
-            <Message error style={{textTransform:"capitalize"}} header={this.state.global}/>
+            !!errorMessage &&
+            <Message error style={{textTransform:"capitalize"}} header={errorMessage}/>
           }
 
-          <Form onSubmit={this.handleSubmit}>
+          <Form onSubmit={handleSubmit}>
             <Form.Group widths='equal'>
               <Form.Field className={classnames({error:!!first})}>
                 <label htmlFor="first">First Name</label>
@@ -67,11 +52,5 @@ class ContactForm extends Component {
     )
   }
 }
-
-// ContactForm.propTypes = {
-//   saveContact: React.PropTypes.func.isRequired
-// }
-
-// ContactForm = reduxForm({form: 'contact'})(ContactForm);
 
 export default reduxForm({form: 'contact'})(ContactForm);

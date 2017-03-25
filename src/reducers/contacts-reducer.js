@@ -3,7 +3,7 @@ const defaultState = {
   fetching: false,
   fetched: false,
   errorMessage: null,
-  errors: null
+  errors: {}
 }
 
 export default (state=defaultState, action={}) => {
@@ -33,7 +33,9 @@ export default (state=defaultState, action={}) => {
     case 'SAVE_CONTACT_FULFILLED':
       return {
         ...state,
-        contacts: [...state.contacts, action.payload.data]
+        contacts: [...state.contacts, action.payload.data],
+        errorMessage: null,
+        errors: {}
       }
 
       case 'SAVE_CONTACT_REJECTED':
