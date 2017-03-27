@@ -11,11 +11,11 @@ require('mongoose-type-email');
 
 const contactsSchema = new Schema({
   name : {
-    first: { type: String, required: true },
+    first: { type: String, required: [true, "First Name is required"] },
     last: { type: String, required: false }
   },
-  email : { type: mongoose.SchemaTypes.Email, required: true },
-  phone : { type: String, required: true },
+  email : { type: mongoose.SchemaTypes.Email, required: [true, "Email is required"] },
+  phone : { type: String, required: [true, "Phone is required"] },
   createdAt: { type: Date, 'default': Date.now },
   updatedAt: { type: Date, 'default': Date.now }
 });
