@@ -1,5 +1,10 @@
+const defaultContact = {
+  name:{}
+}
+
 const defaultState = {
   contacts: [],
+  contact: defaultContact,
   fetching: false,
   fetched: false,
   errorMessage: null,
@@ -30,6 +35,12 @@ export default (state=defaultState, action={}) => {
         errorMessage: action.payload.message
        }
 
+    case 'NEW_CONTACT':
+      return {
+        ...state,
+        contact: defaultContact
+      }
+
     case 'SAVE_CONTACT_FULFILLED':
       return {
         ...state,
@@ -38,28 +49,20 @@ export default (state=defaultState, action={}) => {
         errors: {}
       }
 
-      case 'SAVE_CONTACT_REJECTED':
-        const data = action.payload.response.data;
-        return {
-          ...state,
-          errorMessage: data.message,
-          errors: data.errors
-        }
+    case 'SAVE_CONTACT_REJECTED':
+      const data = action.payload.response.data;
+      return {
+        ...state,
+        errorMessage: data.message,
+        errors: data.errors
+      }
 
-        case 'FETCH_CONTACT_FULFILLED':
-          const contact = action.payload.data;
-          const index = state.contacts.indexOf(item => item._id === contact._id)
-          if(index > 1) {
-            return {
-              ...state,
-              contacts: contact.map(item => item._id === contact._id ? contact : item)
-            }
-          } else {
-            return {
-              ...state,
-              contacts: [...state.contacts, contact]
-            }
-          }
+    case 'FETCH_CONTACT_FULFILLED':
+      const contact = action.payload.data;
+      return {
+        ...state,
+        contact
+      }
 
     default:
       return state;
