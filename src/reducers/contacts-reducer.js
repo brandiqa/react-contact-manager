@@ -77,7 +77,20 @@ export default (state=defaultState, action={}) => {
       const contact = action.payload.data;
       return {
         ...state,
-        contacts: state.contacts.map(item => item._id === contact._id ? contact : item)
+        contacts: state.contacts.map(item => item._id === contact._id ? contact : item),
+        errorMessage: null,
+        errors: {}
+      }
+    }
+
+    case 'UPDATE_CONTACT_REJECTED': {
+      const data = action.payload.response.data;
+      const { "name.first":first, "name.last":last, phone, email } = data.errors;
+      const errors = { first, last, phone, email };
+      return {
+        ...state,
+        errorMessage: data.message,
+        errors: errors
       }
     }
 
