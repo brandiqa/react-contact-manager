@@ -5,8 +5,10 @@ import { Field, reduxForm } from 'redux-form';
 
 class ContactForm extends Component {
 
+  // Load Contact Asynchronously
   componentWillReceiveProps = (nextProps) => {
     const { contact } = nextProps;
+    // Initialize form only once
     if(contact._id !== this.props.contact._id) {
       this.props.initialize(contact)
     }
