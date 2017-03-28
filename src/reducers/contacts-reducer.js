@@ -13,13 +13,14 @@ const defaultState = {
 
 export default (state=defaultState, action={}) => {
   switch (action.type) {
-    case 'FETCH_CONTACTS_PENDING':
+    case 'FETCH_CONTACTS_PENDING': {
       return {
         ...state,
         fetching: true
       }
+    }
 
-    case 'FETCH_CONTACTS_FULFILLED':
+    case 'FETCH_CONTACTS_FULFILLED': {
       return {
         ...state,
         fetching: false,
@@ -27,29 +28,33 @@ export default (state=defaultState, action={}) => {
         errorMessage: null,
         contacts: action.payload.data.data,
       }
+    }
 
-    case 'FETCH_CONTACTS_REJECTED':
+    case 'FETCH_CONTACTS_REJECTED': {
       return {
         ...state,
         fetching: false,
         errorMessage: action.payload.message
        }
+     }
 
-    case 'NEW_CONTACT':
+    case 'NEW_CONTACT': {
       return {
         ...state,
         contact: defaultContact
       }
+    }
 
-    case 'SAVE_CONTACT_FULFILLED':
+    case 'SAVE_CONTACT_FULFILLED': {
       return {
         ...state,
         contacts: [...state.contacts, action.payload.data],
         errorMessage: null,
         errors: {}
       }
+    }
 
-    case 'SAVE_CONTACT_REJECTED':
+    case 'SAVE_CONTACT_REJECTED': {
       const data = action.payload.response.data;
       const { "name.first":first, "name.last":last, phone, email } = data.errors;
       const errors = { first, last, phone, email };
@@ -58,13 +63,23 @@ export default (state=defaultState, action={}) => {
         errorMessage: data.message,
         errors: errors
       }
+    }
 
-    case 'FETCH_CONTACT_FULFILLED':
+    case 'FETCH_CONTACT_FULFILLED': {
       const contact = action.payload.data;
       return {
         ...state,
         contact
       }
+    }
+
+    case 'UPDATE_CONTACT_FULFILLED': {
+      const contact = action.payload.data;
+      return {
+        ...state,
+        contacts: state.contacts.map(item => item._id === contact._id ? contact : item)
+      }
+    }
 
     default:
       return state;

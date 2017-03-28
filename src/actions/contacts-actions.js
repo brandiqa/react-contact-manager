@@ -34,3 +34,12 @@ export function fetchContact(_id) {
     })
   }
 }
+
+export function updateContact(contact) {
+  return dispatch => {
+    return dispatch({
+      type: 'UPDATE_CONTACT',
+      payload: client.put(`/api/contacts/${contact._id}`, contact)
+    })
+  }
+}

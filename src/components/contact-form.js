@@ -5,10 +5,17 @@ import { Field, reduxForm } from 'redux-form';
 
 class ContactForm extends Component {
 
+  state = {
+    loaded: false
+  }
+
   componentWillReceiveProps = (nextProps) => {
     const { contact } = nextProps;
-    if(contact._id)
+    if(contact._id && !this.state.loaded) {
       this.props.initialize(contact)
+      this.setState({ loaded:true })
+    }
+
   }
 
   render() {

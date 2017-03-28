@@ -3,7 +3,7 @@ import ContactForm from '../components/contact-form';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
 import { SubmissionError } from 'redux-form';
-import { newContact, saveContact, fetchContact } from '../actions/contacts-actions';
+import { newContact, saveContact, fetchContact, updateContact } from '../actions/contacts-actions';
 
 class ContactsFormPage extends Component {
 
@@ -21,11 +21,19 @@ class ContactsFormPage extends Component {
   }
 
   submit = (contact) => {
-    return this.props.saveContact(contact)
-      .then(response => this.setState({ redirect:true }))
-      .catch(err => {
-         throw new SubmissionError(this.props.errors)
-       })
+    if(!contact._id) {
+      return this.props.saveContact(contact)
+        .then(response => this.setState({ redirect:true }))
+        .catch(err => {
+           throw new SubmissionError(this.props.errors)
+         })
+    } else {
+      return this.props.updateContact(contact)
+        .then(response => this.setState({ redirect:true }))
+        .catch(err => {
+           throw new SubmissionError(this.props.errors)
+         })
+    }
   }
 
   render() {
@@ -49,4 +57,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, {newContact, saveContact, fetchContact }) (ContactsFormPage);
+export default connect(mapStateToProps, {newContact, saveContact, fetchContact, updateContact }) (ContactsFormPage);
