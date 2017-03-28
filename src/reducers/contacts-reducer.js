@@ -46,6 +46,21 @@ export default (state=defaultState, action={}) => {
           errors: data.errors
         }
 
+        case 'FETCH_CONTACT_FULFILLED':
+          const contact = action.payload.data;
+          const index = state.contacts.indexOf(item => item._id === contact._id)
+          if(index > 1) {
+            return {
+              ...state,
+              contacts: contact.map(item => item._id === contact._id ? contact : item)
+            }
+          } else {
+            return {
+              ...state,
+              contacts: [...state.contacts, contact]
+            }
+          }
+
     default:
       return state;
   }

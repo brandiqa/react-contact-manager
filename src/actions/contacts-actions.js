@@ -17,3 +17,12 @@ export function saveContact(contact) {
     })
   }
 }
+
+export function fetchContact(_id) {
+  return dispatch => {
+    return dispatch({
+      type: 'FETCH_CONTACT',
+      payload: client.get(`/api/contacts/${_id}`)
+    })
+  }
+}
