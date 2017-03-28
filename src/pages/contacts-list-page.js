@@ -35,7 +35,7 @@ class ContactsListPage extends Component {
       <div>
         <h1 style={{marginTop:"1em"}}>Contacts List</h1>
         { this.props.fetching ? <Loader active/> : ''}
-        { this.props.error ? errorMessage : contactsComp }
+        { this.props.errorMsg ? errorMessage : contactsComp }
       </div>
     )
   }
