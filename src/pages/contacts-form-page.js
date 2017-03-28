@@ -42,7 +42,7 @@ class ContactsFormPage extends Component {
         {
           this.state.redirect ?
           <Redirect to="/" /> :
-          <ContactForm contact={this.props.contact} errorMessage={this.props.errorMessage} errors={this.props.errors} onSubmit={this.submit} />
+          <ContactForm contact={this.props.contact} errorMessage={this.props.errorMessage} errors={this.props.errors} loading={this.props.loading} onSubmit={this.submit} />
         }
       </div>
     )
@@ -53,7 +53,8 @@ function mapStateToProps(state) {
   return {
     contact: state.contactStore.contact,
     errorMessage: state.contactStore.errorMessage,
-    errors: state.contactStore.errors
+    errors: state.contactStore.errors,
+    loading: state.contactStore.loading
   }
 }
 

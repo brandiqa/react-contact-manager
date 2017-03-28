@@ -19,7 +19,7 @@ class ContactForm extends Component {
   }
 
   render() {
-    const { handleSubmit, pristine, submitting, errorMessage, errors } = this.props;
+    const { handleSubmit, pristine, submitting, loading, errorMessage, errors } = this.props;
     const { first, last, phone, email } = errors;
 
     return (
@@ -32,7 +32,7 @@ class ContactForm extends Component {
             <Message error style={{textTransform:"capitalize"}} header={errorMessage}/>
           }
 
-          <Form onSubmit={handleSubmit}>
+          <Form onSubmit={handleSubmit} loading={loading}>
             <Form.Group widths='equal'>
               <Form.Field className={classnames({error:!!first})}>
                 <label htmlFor="name.first">First Name</label>

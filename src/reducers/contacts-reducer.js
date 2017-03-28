@@ -8,7 +8,8 @@ const defaultState = {
   fetching: false,
   fetched: false,
   errorMessage: null,
-  errors: {}
+  errors: {},
+  loading:false
 }
 
 export default (state=defaultState, action={}) => {
@@ -45,12 +46,20 @@ export default (state=defaultState, action={}) => {
       }
     }
 
+    case 'SAVE_CONTACT_PENDING': {
+      return {
+        ...state,
+        loading: true
+      }
+    }
+
     case 'SAVE_CONTACT_FULFILLED': {
       return {
         ...state,
         contacts: [...state.contacts, action.payload.data],
         errorMessage: null,
-        errors: {}
+        errors: {},
+        loading: false
       }
     }
 
@@ -61,7 +70,15 @@ export default (state=defaultState, action={}) => {
       return {
         ...state,
         errorMessage: data.message,
-        errors: errors
+        errors: errors,
+        loading: false
+      }
+    }
+
+    case 'FETCH_CONTACT_PENDING': {
+      return {
+        ...state,
+        loading: true
       }
     }
 
@@ -69,7 +86,17 @@ export default (state=defaultState, action={}) => {
       const contact = action.payload.data;
       return {
         ...state,
-        contact
+        contact,
+        errorMessage: null,
+        errors: {},
+        loading: false
+      }
+    }
+
+    case 'UPDATE_CONTACT_PENDING': {
+      return {
+        ...state,
+        loading: true
       }
     }
 
@@ -79,7 +106,8 @@ export default (state=defaultState, action={}) => {
         ...state,
         contacts: state.contacts.map(item => item._id === contact._id ? contact : item),
         errorMessage: null,
-        errors: {}
+        errors: {},
+        loading: false
       }
     }
 
@@ -90,7 +118,8 @@ export default (state=defaultState, action={}) => {
       return {
         ...state,
         errorMessage: data.message,
-        errors: errors
+        errors: errors,
+        loading: false
       }
     }
 
