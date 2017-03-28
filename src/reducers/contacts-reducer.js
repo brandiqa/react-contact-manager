@@ -51,10 +51,12 @@ export default (state=defaultState, action={}) => {
 
     case 'SAVE_CONTACT_REJECTED':
       const data = action.payload.response.data;
+      const { "name.first":first, "name.last":last, phone, email } = data.errors;
+      const errors = { first, last, phone, email };
       return {
         ...state,
         errorMessage: data.message,
-        errors: data.errors
+        errors: errors
       }
 
     case 'FETCH_CONTACT_FULFILLED':

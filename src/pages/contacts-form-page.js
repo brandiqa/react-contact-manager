@@ -20,12 +20,11 @@ class ContactsFormPage extends Component {
     }
   }
 
-  submit = ({first, last, phone, email}) => {
-    const contact = { name: { first, last }, phone, email }
+  submit = (contact) => {
     return this.props.saveContact(contact)
       .then(response => this.setState({ redirect:true }))
       .catch(err => {
-         throw new SubmissionError(err.response.data)
+         throw new SubmissionError(this.props.errors)
        })
   }
 

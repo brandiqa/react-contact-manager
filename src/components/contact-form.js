@@ -13,7 +13,7 @@ class ContactForm extends Component {
 
   render() {
     const { handleSubmit, pristine, submitting, errorMessage, errors } = this.props;
-    const { "name.first":first, "name.last":last, phone, email } = errors;
+    const { first, last, phone, email } = errors;
 
     return (
       <Grid centered columns={2}>
@@ -28,13 +28,13 @@ class ContactForm extends Component {
           <Form onSubmit={handleSubmit}>
             <Form.Group widths='equal'>
               <Form.Field className={classnames({error:!!first})}>
-                <label htmlFor="first">First Name</label>
-                <Field name="first" component="input" type="text" placeholder="First Name"/>
+                <label htmlFor="name.first">First Name</label>
+                <Field name="name.first" component="input" type="text" placeholder="First Name"/>
                 <span className="error">{!!first && first.message}</span>
               </Form.Field>
               <Form.Field className={classnames({error: !!last})}>
-                <label htmlFor="last">Last Name</label>
-                <Field name="last" component="input" type="text" placeholder="Last Name"/>
+                <label htmlFor="name.last">Last Name</label>
+                <Field name="name.last" component="input" type="text" placeholder="Last Name"/>
                 <span className="error">{!!last && last.message}</span>
               </Form.Field>
             </Form.Group>
