@@ -43,3 +43,12 @@ export function updateContact(contact) {
     })
   }
 }
+
+export function deleteContact(_id) {
+  return dispatch => {
+    return dispatch({
+      type: 'DELETE_CONTACT',
+      payload: client.delete(`/api/contacts/${_id}`)
+    })
+  }
+}

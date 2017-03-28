@@ -81,6 +81,14 @@ export default (state=defaultState, action={}) => {
       }
     }
 
+    case 'DELETE_CONTACT_FULFILLED': {
+      const _id = action.payload.data._id;
+      return {
+        ...state,
+        contacts: state.contacts.filter(item => item._id !== _id)
+      }
+    }
+
     default:
       return state;
   }

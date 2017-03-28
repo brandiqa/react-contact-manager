@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Message, Card, Loader} from 'semantic-ui-react';
 import ContactCard from '../components/contact-card';
-import { fetchContacts } from "../actions/contacts-actions"
+import { fetchContacts, deleteContact } from "../actions/contacts-actions"
 
 class ContactsListPage extends Component {
 
@@ -13,7 +13,7 @@ class ContactsListPage extends Component {
   createContactCards() {
     return this.props.contacts.map((contact) => {
       return (
-        <ContactCard key={contact._id} contact={contact}/>
+        <ContactCard key={contact._id} contact={contact} deleteContact={this.props.deleteContact}/>
       )
     });
   }
@@ -50,4 +50,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, {fetchContacts})(ContactsListPage);
+export default connect(mapStateToProps, {fetchContacts, deleteContact})(ContactsListPage);
