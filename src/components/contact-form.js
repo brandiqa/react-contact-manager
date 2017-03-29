@@ -2,28 +2,48 @@ import React, { Component } from 'react';
 import { Form, Grid, Button } from 'semantic-ui-react';
 import classnames from 'classnames';
 import { Field, reduxForm } from 'redux-form';
+import _ from 'lodash';
+
+const schema = {
+  name: {
+    nested: true,
+    first: {
+      label: "First Name",
+      required: true
+    },
+    last: {
+      label: "Last Name",
+      required: false
+    }
+  },
+  phone: {
+    label: "Phone",
+    required: true
+  },
+  email: {
+    label: "Email",
+    required: true
+  }
+}
 
 const validate = (values) => {
-  const errors = {name:{}};
-  if(!values.name || !values.name.first) {
-    errors.name.first = {
-      message: 'You need to provide First Name'
+  const errors = {name: {}}
+  _.each(schema, (type, field) => {
+    if(type.nested && values[field]){
+      const nestedSchema = _.omit(type,'nested')
+      _.each(nestedSchema, (ntype, nfield) => {
+        if(ntype.required && !values[field][nfield]) {
+          errors[field][nfield] = {
+            message: `You need to provide ${ntype.label}`
+          }
+        }
+      })
+    } else if(type.required && !values[field]){
+      errors[field] = {
+        message: `You need to provide ${type.label}`
+      }
     }
-  }
-  if(!values.phone) {
-    errors.phone = {
-      message: 'You need to provide a Phone number'
-    }
-  }
-  if(!values.email) {
-    errors.email = {
-      message: 'You need to provide an Email address'
-    }
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = {
-      message: 'Invalid email address'
-    }
-  }
+  })
   return errors;
 }
 
