@@ -46,6 +46,14 @@ export default (state=defaultState, action={}) => {
       }
     }
 
+    case 'VALIDATE_CONTACT_FAILED': {
+      return {
+        ...state,
+        errors: action.payload.errors,
+        errorMessage: action.payload.errorMessage
+      }
+    }
+
     case 'SAVE_CONTACT_PENDING': {
       return {
         ...state,

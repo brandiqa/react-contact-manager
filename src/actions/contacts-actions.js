@@ -17,6 +17,15 @@ export function newContact() {
   }
 }
 
+export function validateContactFailed(payload) {
+  return dispatch => {
+    dispatch({
+      type: 'VALIDATE_CONTACT_FAILED',
+      payload
+    })
+  }
+}
+
 export function saveContact(contact) {
   return dispatch => {
     return dispatch({
