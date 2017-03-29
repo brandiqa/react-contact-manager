@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Grid, Button, Message } from 'semantic-ui-react';
+import { Form, Grid, Button } from 'semantic-ui-react';
 import classnames from 'classnames';
 import { Field, reduxForm } from 'redux-form';
 
@@ -47,13 +47,12 @@ class ContactForm extends Component {
   }
 
   render() {
-    const { handleSubmit, pristine, submitting, loading, errorMessage } = this.props;
+    const { handleSubmit, pristine, submitting, loading } = this.props;
 
     return (
       <Grid centered columns={2}>
         <Grid.Column>
           <h1 style={{marginTop:"1em"}}>Add New Contact</h1>
-          { !!errorMessage && <Message error style={{textTransform:"capitalize"}} header={errorMessage}/> }
           <Form onSubmit={handleSubmit} loading={loading}>
             <Form.Group widths='equal'>
               <Field name="name.first" type="text" component={renderField} label="First Name"/>

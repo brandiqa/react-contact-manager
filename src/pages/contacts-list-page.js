@@ -21,8 +21,8 @@ class ContactsListPage extends Component {
   render() {
     const errorMessage = (
       <Message negative>
-        <Message.Header>{this.props.errorMsg}</Message.Header>
-        <p>Please contact the administrator</p>
+        <Message.Header>SERVER ERROR!</Message.Header>
+        <p>Caused by: {this.props.serverError}</p>
       </Message>
     );
 
@@ -35,7 +35,7 @@ class ContactsListPage extends Component {
       <div>
         <h1 style={{marginTop:"1em"}}>Contacts List</h1>
         { this.props.fetching ? <Loader active/> : ''}
-        { this.props.errorMsg ? errorMessage : contactsComp }
+        { this.props.serverError ? errorMessage : contactsComp }
       </div>
     )
   }
@@ -44,7 +44,7 @@ class ContactsListPage extends Component {
 function mapStateToProps(state) {
   return {
     contacts: state.contactStore.contacts,
-    errorMsg: state.contactStore.errorMessage,
+    serverError: state.contactStore.serverError,
     fetching: state.contactStore.fetching,
     fetched : state.contactStore.fetched
   }

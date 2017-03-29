@@ -7,7 +7,7 @@ const defaultState = {
   contact: defaultContact,
   fetching: false,
   fetched: false,
-  errorMessage: null,
+  serverError: null,
   errors: {},
   loading:false
 }
@@ -31,7 +31,7 @@ export default (state=defaultState, action={}) => {
         ...state,
         fetching: false,
         fetched: true,
-        errorMessage: null,
+        serverError: null,
         contacts: action.payload.data.data,
       }
     }
@@ -40,7 +40,7 @@ export default (state=defaultState, action={}) => {
       return {
         ...state,
         fetching: false,
-        errorMessage: action.payload.message
+        serverError: action.payload.message
        }
      }
 
@@ -62,7 +62,7 @@ export default (state=defaultState, action={}) => {
       return {
         ...state,
         contacts: [...state.contacts, action.payload.data],
-        errorMessage: null,
+        serverError: null,
         errors: {},
         loading: false
       }
@@ -73,7 +73,7 @@ export default (state=defaultState, action={}) => {
       const errors = normalizeErrors(data)
       return {
         ...state,
-        errorMessage: data.message,
+        serverError: data.message,
         errors: errors,
         loading: false
       }
@@ -91,7 +91,7 @@ export default (state=defaultState, action={}) => {
       return {
         ...state,
         contact,
-        errorMessage: null,
+        serverError: null,
         errors: {},
         loading: false
       }
@@ -109,7 +109,7 @@ export default (state=defaultState, action={}) => {
       return {
         ...state,
         contacts: state.contacts.map(item => item._id === contact._id ? contact : item),
-        errorMessage: null,
+        serverError: null,
         errors: {},
         loading: false
       }
@@ -120,7 +120,7 @@ export default (state=defaultState, action={}) => {
       const errors = normalizeErrors(data)
       return {
         ...state,
-        errorMessage: data.message,
+        serverError: data.message,
         errors: errors,
         loading: false
       }
