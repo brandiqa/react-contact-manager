@@ -12,6 +12,11 @@ const defaultState = {
   loading:false
 }
 
+const normalizeErrors = (data) => {
+  const { "name.first":first, "name.last":last, phone, email } = data.errors;
+  return { name: { first,last }, phone, email }
+}
+
 export default (state=defaultState, action={}) => {
   switch (action.type) {
     case 'FETCH_CONTACTS_PENDING': {
@@ -46,14 +51,6 @@ export default (state=defaultState, action={}) => {
       }
     }
 
-    case 'VALIDATE_CONTACT_FAILED': {
-      return {
-        ...state,
-        errors: action.payload.errors,
-        errorMessage: action.payload.errorMessage
-      }
-    }
-
     case 'SAVE_CONTACT_PENDING': {
       return {
         ...state,
@@ -73,8 +70,7 @@ export default (state=defaultState, action={}) => {
 
     case 'SAVE_CONTACT_REJECTED': {
       const data = action.payload.response.data;
-      const { "name.first":first, "name.last":last, phone, email } = data.errors;
-      const errors = { first, last, phone, email };
+      const errors = normalizeErrors(data)
       return {
         ...state,
         errorMessage: data.message,
@@ -121,8 +117,7 @@ export default (state=defaultState, action={}) => {
 
     case 'UPDATE_CONTACT_REJECTED': {
       const data = action.payload.response.data;
-      const { "name.first":first, "name.last":last, phone, email } = data.errors;
-      const errors = { first, last, phone, email };
+      const errors = normalizeErrors(data)
       return {
         ...state,
         errorMessage: data.message,

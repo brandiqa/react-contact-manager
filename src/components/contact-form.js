@@ -47,52 +47,20 @@ class ContactForm extends Component {
   }
 
   render() {
-    const { handleSubmit, pristine, submitting, loading, errorMessage, errors } = this.props;
-    const { first, last, phone, email } = errors;
+    const { handleSubmit, pristine, submitting, loading, errorMessage } = this.props;
 
     return (
       <Grid centered columns={2}>
         <Grid.Column>
           <h1 style={{marginTop:"1em"}}>Add New Contact</h1>
-
-          {
-            !!errorMessage &&
-            <Message error style={{textTransform:"capitalize"}} header={errorMessage}/>
-          }
-
+          { !!errorMessage && <Message error style={{textTransform:"capitalize"}} header={errorMessage}/> }
           <Form onSubmit={handleSubmit} loading={loading}>
             <Form.Group widths='equal'>
-              {/* <Form.Field className={classnames({error:!!first})}>
-                <label htmlFor="name.first">First Name</label>
-                <Field name="name.first" component="input" type="text" placeholder="First Name"/>
-                <span className="error">{!!first && first.message}</span>
-              </Form.Field> */}
-              {/* <Field name="name.first" component={renderField} type="text" placeholder="First Name"/> */}
               <Field name="name.first" type="text" component={renderField} label="First Name"/>
-
-                <Field name="name.last" type="text" component={renderField} label="Last Name"/>
-
-              {/* <Form.Field className={classnames({error: !!last})}>
-                <label htmlFor="name.last">Last Name</label>
-                <Field name="name.last" component="input" type="text" placeholder="Last Name"/>
-                <span className="error">{!!last && last.message}</span>
-              </Form.Field> */}
+              <Field name="name.last" type="text" component={renderField} label="Last Name"/>
             </Form.Group>
-
-            {/* <Form.Field className={classnames({error: !!phone})}>
-              <label htmlFor="phone">Phone</label>
-              <Field name="phone" component="input" type="text" placeholder="Phone Number"/>
-              <span className="error">{!!phone && phone.message}</span>
-            </Form.Field> */}
             <Field name="phone" type="text" component={renderField} label="Phone"/>
-
-            {/* <Form.Field className={classnames({error: !!email})}>
-              <label htmlFor="email">Email</label>
-              <Field name="email" component="input" type="email" placeholder="Email Address"/>
-              <span className="error">{!!email && email.message}</span>
-            </Form.Field> */}
-              <Field name="email" type="text" component={renderField} label="Email"/>
-
+            <Field name="email" type="text" component={renderField} label="Email"/>
             <Button primary type='submit' disabled={pristine || submitting}>Save</Button>
           </Form>
         </Grid.Column>
