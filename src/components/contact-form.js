@@ -27,27 +27,32 @@ const schema = {
   }
 }
 
+const validateField = (type, value) => {
+  if(type.required && !value ) {
+    return `You need to provide ${type.label}`
+  }
+  if(type.validator && value) {
+    return type.validator(value)
+  }
+  return null
+}
+
 const validate = (values) => {
   const errors = {name: {}}
   _.each(schema, (type, field) => {
     if(type.nested){
       const nestedSchema = _.omit(type,'nested')
       _.each(nestedSchema, (ntype, nfield) => {
-        if(ntype.required && (!values[field] || !values[field][nfield])) {
-          errors[field][nfield] = {
-            message: `You need to provide ${ntype.label}`
+          const nvalue = values[field] ? values[field][nfield] : null
+          const msg = validateField(ntype, nvalue)
+          if(msg) {
+            errors[field][nfield] = { message: msg }
           }
-        }
       })
     } else {
-      if(type.required && !values[field]){
-        errors[field] = {
-          message: `You need to provide ${type.label}`
-        }
-      } else if(values[field] && type.validator && type.validator(values[field])) {
-        errors[field] = {
-          message: type.validator(values[field])
-        }
+      const msg = validateField(type, values[field])
+      if(msg) {
+        errors[field] = { message: msg }
       }
     }
   })
