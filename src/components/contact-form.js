@@ -29,10 +29,10 @@ const schema = {
 const validate = (values) => {
   const errors = {name: {}}
   _.each(schema, (type, field) => {
-    if(type.nested && values[field]){
+    if(type.nested){
       const nestedSchema = _.omit(type,'nested')
       _.each(nestedSchema, (ntype, nfield) => {
-        if(ntype.required && !values[field][nfield]) {
+        if(ntype.required && (!values[field] || !values[field][nfield])) {
           errors[field][nfield] = {
             message: `You need to provide ${ntype.label}`
           }
