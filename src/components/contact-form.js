@@ -27,33 +27,32 @@ const schema = {
   }
 }
 
-const validateField = (type, value) => {
+const validateField = (type, field, value) => {
   if(type.required && !value ) {
-    return `You need to provide ${type.label}`
+    return {[field] : {
+      message: `You need to provide ${type.label}`
+    }}
   }
-  if(type.validator && value) {
-    return type.validator(value)
+  if(type.validator && value && type.validator(value)) {
+    return {[field] : {
+      message: type.validator(value)
+    }}
   }
-  return null
+  return {}
 }
 
 const validate = (values) => {
-  const errors = {name: {}}
+  let errors = {name: {}}
   _.each(schema, (type, field) => {
     if(type.nested){
       const nestedSchema = _.omit(type,'nested')
       _.each(nestedSchema, (ntype, nfield) => {
           const nvalue = values[field] ? values[field][nfield] : null
-          const msg = validateField(ntype, nvalue)
-          if(msg) {
-            errors[field][nfield] = { message: msg }
-          }
+          const nerror = validateField(ntype, nfield, nvalue)
+          errors[field] = Object.assign({}, errors[field], nerror )
       })
     } else {
-      const msg = validateField(type, values[field])
-      if(msg) {
-        errors[field] = { message: msg }
-      }
+      errors = Object.assign({}, errors, validateField(type, field, values[field]))
     }
   })
   return errors;
