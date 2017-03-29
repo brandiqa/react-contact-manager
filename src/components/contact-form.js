@@ -22,7 +22,8 @@ const schema = {
   },
   email: {
     label: "Email",
-    required: true
+    required: true,
+    validator: (value) => { return !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value) ? 'Invalid Email address' : '' }
   }
 }
 
@@ -38,9 +39,15 @@ const validate = (values) => {
           }
         }
       })
-    } else if(type.required && !values[field]){
-      errors[field] = {
-        message: `You need to provide ${type.label}`
+    } else {
+      if(type.required && !values[field]){
+        errors[field] = {
+          message: `You need to provide ${type.label}`
+        }
+      } else if(values[field] && type.validator && type.validator(values[field])) {
+        errors[field] = {
+          message: type.validator(values[field])
+        }
       }
     }
   })
