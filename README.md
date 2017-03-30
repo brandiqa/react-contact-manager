@@ -1,7 +1,7 @@
 # REACT CONTACT MANAGER
 
 ## Introduction
-This a basic crud react-redux application for managing contacts. It currently uses mongodb for the server and featherjs as the rest backend server
+This a basic crud react-redux application for managing contacts. It currently uses mongodb for the server and featherjs as the rest backend server.
 
 ##  How to install
 
@@ -20,7 +20,7 @@ Ensure you have mongodb installed in your system and that it is running
 cd react-contact-manager/backend
 npm start
 ```
-
+This will run the backend server at localhost:3030. If all is working well, you should be able to access the url http://localhost:3030/api/contacts from your Browser or Postman
 
 ### Start the client
 ```bash
@@ -29,7 +29,3 @@ npm start
 ```
 
 Your default web browser will be launched automatically with the url http://localhost:3000
-
-
-## Important!
-Project is still currently under development
