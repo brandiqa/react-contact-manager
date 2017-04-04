@@ -82,15 +82,15 @@ export default (state=defaultState, action={}) => {
     case 'FETCH_CONTACT_PENDING': {
       return {
         ...state,
-        loading: true
+        loading: true,
+        contact: defaultContact
       }
     }
 
     case 'FETCH_CONTACT_FULFILLED': {
-      const contact = action.payload.data;
       return {
         ...state,
-        contact,
+        contact: action.payload.data,
         serverError: null,
         errors: {},
         loading: false
