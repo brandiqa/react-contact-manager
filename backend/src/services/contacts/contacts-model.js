@@ -15,7 +15,16 @@ const contactsSchema = new Schema({
     last: { type: String, required: false }
   },
   email : { type: mongoose.SchemaTypes.Email, required: [true, "Email is required"] },
-  phone : { type: String, required: [true, "Phone is required"] },
+  phone : {
+    type: String,
+    required: [true, "Phone is required"],
+    validate: {
+      validator: function(v) {
+        return /^\+?([0-9]{2})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{4})$/.test(v);
+      },
+      message: '{VALUE} is not a valid phone number!'
+    }
+   },
   createdAt: { type: Date, 'default': Date.now },
   updatedAt: { type: Date, 'default': Date.now }
 });
