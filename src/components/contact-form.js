@@ -18,7 +18,8 @@ const schema = {
   },
   phone: {
     label: "Phone",
-    required: true
+    required: true,
+    validator: (value) => { return /^\+(?:[0-9] ?){6,14}[0-9]$/.test(value) ? '' : 'Invalid international Phone No.' }
   },
   email: {
     label: "Email",
