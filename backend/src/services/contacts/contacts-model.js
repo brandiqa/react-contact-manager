@@ -20,9 +20,9 @@ const contactsSchema = new Schema({
     required: [true, "Phone is required"],
     validate: {
       validator: function(v) {
-        return /^\+?([0-9]{2})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{4})$/.test(v);
+        return /^\+(?:[0-9] ?){6,14}[0-9]$/.test(v);
       },
-      message: '{VALUE} is not a valid phone number!'
+      message: '{VALUE} is not a valid international phone number!'
     }
    },
   createdAt: { type: Date, 'default': Date.now },
